@@ -1,8 +1,8 @@
 # Build stage
-FROM eclipse-temurin:21-jdk-jammy AS builder
+FROM gradle:8.13-jdk21-jammy AS builder
 WORKDIR /app
 COPY . .
-RUN ./gradlew clean build -x test
+RUN gradle clean build -x test
 # Runtime stage
 FROM eclipse-temurin:21-jdk-jammy
 WORKDIR /app

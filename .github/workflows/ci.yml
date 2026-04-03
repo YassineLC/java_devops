@@ -21,17 +21,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 21
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '21'
-          cache: 'gradle'
-
       - name: Run Tests
         run: |
-          chmod +x gradlew
-          ./gradlew test
+          docker run --rm \
+            -v "${{ github.workspace }}:/app" \
+            -w /app \
+            gradle:8.13-jdk21-jammy \
+            gradle test
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
