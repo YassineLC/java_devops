@@ -36,12 +36,32 @@ jobs:
           files: |
             build/test-results/**/*.xml
 
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
+      - name: Coverage Summary
+        if: always()
+        run: |
+          XML=build/reports/jacoco/test/jacocoTestReport.xml
+          if [ ! -f "$XML" ]; then echo "No JaCoCo report found"; exit 0; fi
+          missed=$(grep -o 'missed="[0-9]*"' "$XML" | head -1 | grep -o '[0-9]*')
+          covered=$(grep -o 'covered="[0-9]*"' "$XML" | head -1 | grep -o '[0-9]*')
+          total=$((missed + covered))
+          if [ $total -gt 0 ]; then
+            pct=$(( covered * 100 / total ))
+          else
+            pct=0
+          fi
+          echo "## Code Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "| Metric | Value |" >> $GITHUB_STEP_SUMMARY
+          echo "|--------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| Instructions covered | $covered / $total |" >> $GITHUB_STEP_SUMMARY
+          echo "| Coverage | **$pct%** |" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload JaCoCo HTML report as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
         with:
-          files: build/reports/jacoco/test/jacocoTestReport.xml
-          flags: unittests
-          fail_ci_if_error: false
+          name: jacoco-coverage-report
+          path: build/reports/jacoco/test/html/
+          retention-days: 7
 
       - name: Build Docker image
         run: docker build -t java_devops:latest .
