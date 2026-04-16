@@ -21,13 +21,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run Tests
+      - name: Run Tests with Coverage
         run: |
           docker run --rm \
             -v "${{ github.workspace }}:/app" \
             -w /app \
             gradle:8.13-jdk21-jammy \
-            gradle test
+            gradle test jacocoTestReport
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
@@ -35,6 +35,13 @@ jobs:
         with:
           files: |
             build/test-results/**/*.xml
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: build/reports/jacoco/test/jacocoTestReport.xml
+          flags: unittests
+          fail_ci_if_error: false
 
       - name: Build Docker image
         run: docker build -t java_devops:latest .
