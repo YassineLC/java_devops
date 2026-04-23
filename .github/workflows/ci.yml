@@ -63,6 +63,14 @@ jobs:
           path: build/reports/jacoco/test/html/
           retention-days: 7
 
+      - name: SonarCloud Analysis
+        run: |
+          docker run --rm \
+            -v "${{ github.workspace }}:/app" \
+            -w /app \
+            gradle:8.13-jdk21-jammy \
+            gradle sonar -Dsonar.token=${{ secrets.SONAR_TOKEN }}
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:

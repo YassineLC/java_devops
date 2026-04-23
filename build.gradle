@@ -3,6 +3,7 @@ plugins {
 	id 'org.springframework.boot' version '3.2.5'
 	id 'io.spring.dependency-management' version '1.1.7'
 	id 'jacoco'
+	id 'org.sonarqube' version '5.1.0.4882'
 }
 
 group = 'ytg'
@@ -38,5 +39,14 @@ tasks.named('jacocoTestReport') {
 	reports {
 		xml.required = true
 		html.required = true
+	}
+}
+
+sonar {
+	properties {
+		property 'sonar.projectKey', 'YassineLC_java_devops'
+		property 'sonar.organization', 'yassineLC'
+		property 'sonar.host.url', 'https://sonarcloud.io'
+		property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
 	}
 }
