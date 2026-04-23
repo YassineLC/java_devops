@@ -2,15 +2,17 @@ package ytg.java_devops.controllers;
 
 import ytg.java_devops.entities.Car;
 import ytg.java_devops.services.CarService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 public class RentServiceRest {
 
-    @Autowired
-    private CarService carService;
+    private final CarService carService;
+
+    public RentServiceRest(CarService carService) {
+        this.carService = carService;
+    }
 
     @PostMapping("/cars")
     public void addCar(@RequestBody Car car) {

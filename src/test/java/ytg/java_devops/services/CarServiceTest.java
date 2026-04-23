@@ -5,24 +5,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CarServiceTest {
+class CarServiceTest {
 
     private CarService carService;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         carService = new CarService();
     }
 
     @Test
-    public void testAddCar() {
+    void testAddCar() {
         Car car = new Car("ABC123", "Toyota", 15000.0);
         carService.addCar(car);
         assertEquals(1, carService.getCars().size());
     }
 
     @Test
-    public void testGetCars() {
+    void testGetCars() {
         Car car1 = new Car("ABC123", "Toyota", 15000.0);
         Car car2 = new Car("XYZ789", "Honda", 18000.0);
         carService.addCar(car1);
@@ -31,7 +31,7 @@ public class CarServiceTest {
     }
 
     @Test
-    public void testGetCarByPlateNumber() {
+    void testGetCarByPlateNumber() {
         Car car = new Car("ABC123", "Toyota", 15000.0);
         carService.addCar(car);
         Car result = carService.getCar("ABC123");
@@ -41,13 +41,13 @@ public class CarServiceTest {
     }
 
     @Test
-    public void testGetCarNotFound() {
+    void testGetCarNotFound() {
         Car result = carService.getCar("NOTFOUND");
         assertNull(result);
     }
 
     @Test
-    public void testAddMultipleCars() {
+    void testAddMultipleCars() {
         Car car1 = new Car("ABC123", "Toyota", 15000.0);
         Car car2 = new Car("XYZ789", "Honda", 18000.0);
         Car car3 = new Car("DEF456", "Ford", 20000.0);

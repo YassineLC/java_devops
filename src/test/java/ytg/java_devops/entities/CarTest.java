@@ -3,10 +3,10 @@ package ytg.java_devops.entities;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class CarTest {
+class CarTest {
 
     @Test
-    public void testCarConstructor() {
+    void testCarConstructor() {
         Car car = new Car("ABC123", "Toyota", 15000.0);
         assertEquals("ABC123", car.getPlateNumber());
         assertEquals("Toyota", car.getBrand());
@@ -14,28 +14,28 @@ public class CarTest {
     }
 
     @Test
-    public void testSetPlateNumber() {
+    void testSetPlateNumber() {
         Car car = new Car("ABC123", "Toyota", 15000.0);
         car.setPlateNumber("XYZ789");
         assertEquals("XYZ789", car.getPlateNumber());
     }
 
     @Test
-    public void testSetBrand() {
+    void testSetBrand() {
         Car car = new Car("ABC123", "Toyota", 15000.0);
         car.setBrand("Honda");
         assertEquals("Honda", car.getBrand());
     }
 
     @Test
-    public void testSetPrice() {
+    void testSetPrice() {
         Car car = new Car("ABC123", "Toyota", 15000.0);
         car.setPrice(20000.0);
         assertEquals(20000.0, car.getPrice());
     }
 
     @Test
-    public void testToString() {
+    void testToString() {
         Car car = new Car("ABC123", "Toyota", 15000.0);
         String expected = "Car{plateNumber='ABC123', brand='Toyota', price=15000.0}";
         assertEquals(expected, car.toString());

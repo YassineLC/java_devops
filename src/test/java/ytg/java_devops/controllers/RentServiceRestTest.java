@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
-public class RentServiceRestTest {
+class RentServiceRestTest {
 
     @Autowired
     private WebApplicationContext webApplicationContext;
@@ -23,12 +23,12 @@ public class RentServiceRestTest {
     private MockMvc mockMvc;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
     }
 
     @Test
-    public void testAddCar() throws Exception {
+    void testAddCar() throws Exception {
         Car car = new Car("ABC123", "Toyota", 15000.0);
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -39,7 +39,7 @@ public class RentServiceRestTest {
     }
 
     @Test
-    public void testGetCars() throws Exception {
+    void testGetCars() throws Exception {
         Car car = new Car("ABC123", "Toyota", 15000.0);
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -52,7 +52,7 @@ public class RentServiceRestTest {
     }
 
     @Test
-    public void testGetCarByPlateNumber() throws Exception {
+    void testGetCarByPlateNumber() throws Exception {
         Car car = new Car("ABC123", "Toyota", 15000.0);
         ObjectMapper objectMapper = new ObjectMapper();
 
