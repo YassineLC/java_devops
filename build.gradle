@@ -45,7 +45,7 @@ tasks.named('jacocoTestReport') {
 sonar {
 	properties {
 		property 'sonar.projectKey', 'YassineLC_java_devops'
-		property 'sonar.organization', 'yassineLC'
+		property 'sonar.organization', 'YassineLC'
 		property 'sonar.host.url', 'https://sonarcloud.io'
 		property 'sonar.coverage.jacoco.xmlReportPaths', 'build/reports/jacoco/test/jacocoTestReport.xml'
 	}
